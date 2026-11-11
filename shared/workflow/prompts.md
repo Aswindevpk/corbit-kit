@@ -97,6 +97,13 @@ Find where to write it with `./fidtrack path [FID]` — write there directly, or
 scratch file and adopt it with `./fidtrack logic [FID] <file>` once approved.
 ```
 
+**Submitting it for approval:** once section 6's criteria are numbered, compile it to a
+PDF with `fiddocs --fid [FID]` (install once: `pip install
+git+https://github.com/Aswindevpk/corbit-kit.git#subdirectory=shared/tools/fid-docs-pdf`).
+Send that PDF for approval. Only after it's approved does Phase 5 (build) begin for
+that FID — `fiddocs` skips a FID whose `LOGIC.md` is still the empty template, so an
+accidentally-early PDF comes back empty rather than wrong.
+
 ## Phase 5: Build (four sessions per FID)
 
 Start with `./fidtrack start [FID] --by "<name>"` (confirms the logic was read) and

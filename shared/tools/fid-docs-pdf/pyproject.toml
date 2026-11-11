@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fid-docs-pdf"
+version = "0.1.0"
+description = "Compile a fidtrack project's FID/ Logic Documents into a publication-ready PDF (one FID, or the whole project)"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Corbit Technologies" }]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: Documentation",
+]
+dependencies = [
+    "markdown>=3.6",
+    "pymupdf>=1.24.0",
+]
+
+[project.scripts]
+fiddocs = "fid_docs_pdf.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["fid_docs_pdf*"]

@@ -11,3 +11,8 @@ devtest/.env
 
 # scratch projects created while testing the kit itself
 /pilots/
+
+# Python package build artifacts (fid-docs-pdf)
+*.egg-info/
+__pycache__/
+*.pyc

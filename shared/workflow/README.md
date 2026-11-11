@@ -12,7 +12,7 @@ tree from the feature list in one step.
 | 1. Clarification | Numbered questions on gaps | — (chat) | You answer every question |
 | 2. Feature register | FIDs, one per feature | `features.txt` passed to `new-project.js` / `fidtrack import` | Scope frozen |
 | 3. Foundation | DB design, field register, shared rules, UI states, **RBAC tier + persona matrix** | `db_structure/`, `project-wide-rules-and-technical-foundation/` | Schema frozen |
-| 4. Logic Doc (per FID) | 6-section CLDS doc incl. **RPC/API contract, error codes, acceptance criteria** | `FID/<path>/features/LOGIC.md` (`fidtrack path` / `fidtrack logic`) | Logic approved |
+| 4. Logic Doc (per FID) | 6-section CLDS doc incl. **RPC/API contract, error codes, acceptance criteria** | `FID/<path>/features/LOGIC.md` (`fidtrack path` / `fidtrack logic`) | Logic approved (PDF via `fiddocs --fid [FID]`) |
 | 5. Build (per FID) | Backend + tests, then `api/`, then dumb UI, then page | `src/features/<feature>/`, tracked by `fidtrack start`/`done` | Tests green, lint clean, `fidtrack done` |
 | 6. Test (per FID) | Test cases from Section 6, run, recorded | `FID/<path>/features/tests/` (`cortest generate`/`approve`/`record`) | `cortest status <FID>` shows complete |
 | 7. Handover | User manual + walkthrough script | `docs/handover/` | Client sign-off, `cortest gate` ready |
