@@ -1,0 +1,6 @@
+---
+description: Project architecture rules
+alwaysApply: true
+---
+Follow AGENTS.md at the repository root, and supabase/AGENTS.md for anything under supabase/.
+The reference feature is src/features/branches/. Copy its structure for new features.

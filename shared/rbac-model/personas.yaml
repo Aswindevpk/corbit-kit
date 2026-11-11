@@ -1,0 +1,50 @@
+# Persona access matrix.
+# Phase 3 writes one of these per project (docs/00-foundation/rbac.md).
+# Every platform's RBAC tests must cover each row. This example is the Tier 4
+# seed used by the Supabase template.
+
+tenants:
+  - code: CLT
+  - code: KOC
+
+personas:
+  - name: Head-office admin
+    grants: [{ role: super_admin, scope: global }]
+    expect:
+      - { permission: branches.create, tenant: null, allowed: true }
+      - { permission: fees.delete,     tenant: KOC,  allowed: true }
+
+  - name: Calicut branch manager
+    grants: [{ role: branch_manager, scope: tenant, tenant: CLT }]
+    expect:
+      - { permission: branches.update, tenant: CLT,  allowed: true }
+      - { permission: branches.update, tenant: KOC,  allowed: false }
+      - { permission: branches.create, tenant: null, allowed: false }
+      - { permission: users.manage,    tenant: CLT,  allowed: true }
+
+  - name: Calicut accountant
+    grants: [{ role: accountant, scope: tenant, tenant: CLT }]
+    expect:
+      - { permission: fees.read,   tenant: CLT, allowed: true }
+      - { permission: fees.read,   tenant: KOC, allowed: false }
+      - { permission: crm.read,    tenant: CLT, allowed: false }
+
+  - name: Teacher at two campuses
+    grants:
+      - { role: teacher, scope: tenant, tenant: CLT }
+      - { role: teacher, scope: tenant, tenant: KOC }
+    expect:
+      - { permission: attendance.create, tenant: CLT, allowed: true }
+      - { permission: attendance.create, tenant: KOC, allowed: true }
+      - { permission: fees.read,         tenant: CLT, allowed: false }
+
+  - name: Signed-up user with no grants
+    grants: []
+    expect:
+      - { permission: branches.read, tenant: CLT, allowed: false }
+
+escalation_checks:
+  - Branch manager cannot grant super_admin.
+  - Branch manager cannot grant any global membership.
+  - No user can update their own role, scope or permissions directly.
+  - Deleting tenant KOC removes KOC memberships and grants nothing globally.

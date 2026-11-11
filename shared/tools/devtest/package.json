@@ -1,0 +1,10 @@
+{
+  "name": "corbit-devtest",
+  "version": "1.0.0",
+  "description": "fidtrack + cortest: FID-based development and verification tracking for the COR SDLC",
+  "private": true,
+  "license": "UNLICENSED",
+  "bin": { "fidtrack": "bin/fidtrack.js", "cortest": "bin/cortest.js" },
+  "scripts": { "test": "node --test test/" },
+  "engines": { "node": ">=18" }
+}

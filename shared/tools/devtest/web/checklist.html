@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FID Checklist</title>
+<style>
+:root{color-scheme:light dark;--bg:#f4f5f7;--panel:#fff;--ink:#1a2030;--mut:#5a6374;--line:#dce0e7;--soft:#eef0f4;--acc:#1f4fd8;--accink:#fff;
+--g:#156c3c;--gbg:#e2f3e9;--r:#b0241c;--rbg:#fde7e5;--a:#855600;--abg:#fcefcf;--b:#1b54b4;--bbg:#e3edfc;--n:#525c6c;--nbg:#e9ecf1;--focus:#1f4fd8}
+@media (prefers-color-scheme:dark){:root{--bg:#11141a;--panel:#191e27;--ink:#e5e8ee;--mut:#9aa4b5;--line:#2b3340;--soft:#212732;--acc:#86a8ff;--accink:#0b1120;
+--g:#70d49b;--gbg:#14321f;--r:#ff938a;--rbg:#3c1a18;--a:#f0c463;--abg:#392d10;--b:#90b8ff;--bbg:#172a49;--n:#aab3c2;--nbg:#252c37;--focus:#a3beff}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-wrap:anywhere}
+h1,h2,h3,p{margin:0}
+h2{font-size:15px;margin:0 0 8px}
+h3{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:14px 0 6px}
+code{font:12px/1.3 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--soft);padding:1px 5px;border-radius:4px;white-space:nowrap}
+a{color:var(--acc)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+#ro{background:var(--abg);color:var(--a);padding:6px 16px;font-weight:600;text-align:center;border-bottom:1px solid var(--line)}
+header{background:var(--panel);border-bottom:1px solid var(--line)}
+.hd{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;padding:12px 0 10px}
+.hd h1{font-size:18px}
+.hd .sub{color:var(--mut);font-size:12px}
+.hd-prog{flex:1 1 220px;min-width:180px}
+.hd-name{display:flex;flex-direction:column;gap:2px}
+.hd-name label{font-size:11px;color:var(--mut);font-weight:600}
+.hd-name input{width:190px;max-width:100%}
+#nameMsg{color:var(--r);font-size:12px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.bar{height:8px;background:var(--nbg);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--g);border-radius:99px}
+nav{background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{border:0;background:none;padding:10px 12px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;color:var(--mut);font-weight:600}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--acc)}
+.tabs small{font-weight:500;color:var(--mut)}
+main{padding:16px 0 60px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.card .k{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.card .v{font-size:20px;font-weight:700;margin:2px 0 4px}
+.b{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 8px;border-radius:99px;white-space:nowrap;border:1px solid transparent}
+.b-g{background:var(--gbg);color:var(--g)}.b-r{background:var(--rbg);color:var(--r)}.b-a{background:var(--abg);color:var(--a)}.b-b{background:var(--bbg);color:var(--b)}.b-n{background:var(--nbg);color:var(--n)}
+.tag{display:inline-block;font-size:11px;padding:0 6px;border-radius:4px;border:1px solid var(--line);color:var(--mut);white-space:nowrap}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:4px 10px;cursor:pointer;font-weight:600;font-size:13px;white-space:nowrap}
+.btn:hover:not(:disabled){background:var(--soft)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.pri{background:var(--acc);color:var(--accink);border-color:var(--acc)}
+.btn.ok{color:var(--g);border-color:var(--g)}.btn.bad{color:var(--r);border-color:var(--r)}.btn.warn{color:var(--a);border-color:var(--a)}
+.btn.sm{padding:2px 8px;font-size:12px}
+input[type=text],input[type=search],select,textarea{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:5px 8px;max-width:100%}
+textarea{width:100%;resize:vertical}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.tool .sp{flex:1}
+.mut{color:var(--mut)}.small{font-size:12px}
+.note{padding:8px 12px;border-radius:6px;margin-bottom:10px;border:1px solid var(--line)}
+.note.n-a{background:var(--abg);color:var(--a)}.note.n-r{background:var(--rbg);color:var(--r)}.note.n-b{background:var(--bbg);color:var(--b)}.note.n-g{background:var(--gbg);color:var(--g)}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
+.tw{overflow-x:auto}
+/* FID rows */
+.fr{border-bottom:1px solid var(--line);padding:7px 0}
+.fr:last-child{border-bottom:0}
+.fr-top{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.fr-main{display:flex;gap:6px;align-items:center;flex:1 1 300px;min-width:0;padding-left:calc(var(--d,0)*18px)}
+.fr-main .nm{font-weight:600;min-width:0}
+.fr-ctl{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.fr-x{padding-left:calc(var(--d,0)*18px + 28px);margin-top:4px;font-size:12.5px}
+.tg{width:22px;height:22px;border:1px solid var(--line);background:var(--panel);border-radius:4px;cursor:pointer;padding:0;line-height:1;flex:none}
+.tg.none{visibility:hidden}
+label.ck{display:inline-flex;gap:5px;align-items:center;cursor:pointer;white-space:nowrap}
+label.ck input:disabled{cursor:not-allowed}
+details>summary{cursor:pointer}
+ul.plain{margin:4px 0 0;padding-left:18px}
+/* cases */
+.fb{border:1px solid var(--line);border-radius:8px;margin:8px 0;background:var(--panel)}
+.fb-h{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:8px 12px;background:var(--soft);border-radius:8px 8px 0 0}
+.fb-h .nm{font-weight:600}
+.fb-b{padding:2px 12px 6px}
+.case{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
+.case:last-child{border-bottom:0}
+.case>details{flex:1 1 320px;min-width:0}
+.case summary .ct{font-weight:600}
+.ca{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.cx{flex:1 1 100%;font-size:12.5px}
+.cb{margin:6px 0 2px 16px;font-size:13px}
+.cb p{margin:4px 0}.cb ol{margin:2px 0 4px;padding-left:20px}
+.mod{margin-bottom:10px}
+.mod>summary{font-weight:700;padding:6px 2px;font-size:14px}
+.acl{list-style:none;margin:0;padding:0}
+.acl li{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.acl li:last-child{border:0}
+/* dialog + toast */
+dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);padding:16px;width:min(640px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow:auto}
+dialog.wide{width:min(900px,calc(100vw - 24px))}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+.f{display:grid;gap:10px}
+.f label.l{display:grid;gap:3px;font-weight:600;font-size:12.5px}
+.f label.l>input,.f label.l>select{width:100%}
+.f .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.f .acts{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.f .err{color:var(--r);font-weight:600}
+.pick{border:1px solid var(--line);border-radius:6px;max-height:150px;overflow:auto;padding:6px 8px;display:grid;gap:3px;font-weight:400}
+fieldset{border:0;padding:0;margin:0}legend{font-weight:600;font-size:12.5px;padding:0;margin-bottom:3px}
+pre.logic{white-space:pre-wrap;background:var(--soft);padding:12px;border-radius:6px;font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;margin:8px 0;max-height:65vh;overflow:auto}
+#toasts{position:fixed;left:12px;right:12px;bottom:12px;display:grid;gap:8px;justify-items:center;z-index:50;pointer-events:none}
+.toast{pointer-events:auto;max-width:640px;width:100%;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel);box-shadow:0 6px 24px rgba(0,0,0,.18)}
+.toast.err{background:var(--rbg);color:var(--r);border-color:var(--r)}.toast.ok{background:var(--gbg);color:var(--g);border-color:var(--g)}
+.toast span{flex:1;font-weight:600}
+.toast button{border:0;background:none;cursor:pointer;font-weight:700;color:inherit;padding:0 4px}
+#print{display:none}
+@media (max-width:520px){.wrap{padding:0 10px}.fr-x{padding-left:calc(var(--d,0)*10px + 8px)}.fr-main{padding-left:calc(var(--d,0)*10px)}.hd-name input{width:150px}}
+@media print{
+  @page{size:A4;margin:14mm}
+  body{background:#fff;color:#000;font-size:10.5pt}
+  body>*:not(#print){display:none!important}
+  #print{display:block}
+  #print h1{font-size:16pt;margin-bottom:2pt}#print h2{font-size:11.5pt;margin:12pt 0 4pt;break-after:avoid}
+  #print table{font-size:9pt}#print th,#print td{border:1px solid #999;padding:3pt 5pt;color:#000}
+  #print tr{break-inside:avoid}
+  #print .sig td{height:26pt}
+  .b{background:none!important;color:#000!important;border:0;padding:0;font-weight:700}
+}
+</style>
+</head>
+<body>
+<!--DEVTEST_BOOT-->
+<div id="ro" hidden>Read-only snapshot. Run <code>./fidtrack serve</code> to make changes.</div>
+<header><div class="wrap hd">
+  <div><h1 id="hProject">FID Checklist</h1><div class="sub" id="hSub"></div></div>
+  <div class="hd-prog"><div class="small" id="hPct"></div><div class="bar" role="img" id="hBar" aria-label="Overall progress"><i></i></div></div>
+  <div class="chips" id="hChips"></div>
+  <div class="hd-name" id="hName"><label for="who">Your name</label><input type="text" id="who" autocomplete="name" placeholder="Required to record"><span id="nameMsg" role="alert"></span></div>
+</div></header>
+<nav aria-label="Checklists"><div class="wrap"><div class="tabs" role="tablist" id="tabs"></div></div></nav>
+<main class="wrap" id="main"></main>
+<dialog id="dlg" aria-labelledby="dlgT"><div id="dlgC"></div></dialog>
+<div id="toasts" aria-live="assertive"></div>
+<div id="print"></div>
+<script>
+(function(){
+'use strict';
+var BOOT = window.__DEVTEST__ || {live:false,state:null};
+var LIVE = !!BOOT.live, S = BOOT.state;
+var $ = function(s,r){return (r||document).querySelector(s);};
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function cssEsc(s){return window.CSS&&CSS.escape?CSS.escape(s):String(s).replace(/["\\]/g,'\\$&');}
+function fmt(t){if(!t)return '';var d=new Date(t);if(isNaN(d))return esc(t);var p=function(n){return String(n).padStart(2,'0');};return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());}
+var TABS=[['overview','Overview'],['dev','Development'],['cases','Test cases'],['l1','Individual (L1)'],['l2','Integration (L2)'],['c1','C1 cross-feature'],['c2','C2 one-go']];
+var ui={tab:'overview',open:{},collapsed:{},devQ:'',devState:'',tcFid:null,lvQ:{l1:'',l2:''},lvTodo:{l1:false,l2:false}};
+var INFO={complete:['g','Complete'],pass:['g','Passed'],passed:['g','Passed'],failed:['r','Failed'],fail:['r','Failed'],blocked:['r','Blocked'],invalidated:['r','Invalidated'],aborted:['r','Aborted'],
+'needs-retest':['a','Needs re-test'],stale:['a','Re-test needed'],uncovered:['a','Not fully covered'],'no-tests':['a','No approved tests'],'no-criteria':['a','No acceptance criteria'],
+'in-progress':['b','In progress'],running:['b','Running'],ready:['b','Ready to start'],'not-started':['n','Not started'],pending:['n','Not run'],draft:['n','Draft'],'n/a':['n','N/A'],locked:['n','Locked'],approved:['b','Approved']};
+function badge(st,prefix){var i=INFO[st]||['n',st];return '<span class="b b-'+i[0]+'">'+(prefix?esc(prefix)+': ':'')+esc(i[1])+'</span>';}
+function attrs(a,data){var s=' data-a="'+esc(a)+'"',fk=a;for(var k in data){s+=' data-'+k+'="'+esc(data[k])+'"';fk+='|'+data[k];}return s+' data-fk="'+esc(fk)+'"';}
+/* write control: omitted entirely in the read-only snapshot */
+function btn(label,a,data,o){if(!LIVE)return '';o=o||{};return '<button type="button" class="btn '+(o.cls||'')+'"'+attrs(a,data||{})+(o.disabled?' disabled':'')+(o.title?' title="'+esc(o.title)+'"':'')+'>'+esc(label)+'</button>';}
+/* navigation control: works in both modes */
+function nbtn(label,a,data,cls){return '<button type="button" class="btn '+(cls||'')+'"'+attrs(a,data||{})+'>'+esc(label)+'</button>';}
+function dopen(key,def){return ((key in ui.open)?ui.open[key]:!!def)?' open':'';}
+function top(id){return id.split('.')[0];}
+function F(id){return S.status.fids[id];}
+function K(id){return S.status.cases[id];}
+function fidLabel(id){var f=F(id);return '<code>'+esc(id)+'</code>'+(f?' '+esc(f.name):'');}
+function chips(ids){return ids.map(function(i){var f=F(i);return '<code title="'+esc(f?f.name:'')+'">'+esc(i)+'</code>';}).join(' ');}
+function affected(k){var a=k.level==='L1'?[k.fid]:k.level==='L2'?[k.fid].concat(k.links||[]):(k.links||[]);return a.filter(function(x,i){return x&&a.indexOf(x)===i;});}
+
+/* ---------- toast / name / api ---------- */
+function toast(msg,kind){var t=document.createElement('div');t.className='toast '+(kind||'');t.setAttribute('role',kind==='err'?'alert':'status');var s=document.createElement('span');s.textContent=msg;var b=document.createElement('button');b.type='button';b.textContent='Dismiss';b.onclick=function(){t.remove();};t.appendChild(s);t.appendChild(b);$('#toasts').appendChild(t);if(kind!=='err')setTimeout(function(){t.remove();},3500);}
+function actor(){var n=$('#who').value.trim();if(!n){$('#nameMsg').textContent='Enter your name first. Every change is recorded with a name.';if($('#dlg').open)$('#dlg').close();$('#who').focus();return null;}$('#nameMsg').textContent='';return {name:n,kind:'human'};}
+function api(method,url,body){
+  return fetch(url,{method:method,headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined})
+    .then(function(r){return r.json().catch(function(){return {ok:false,error:'The server sent an unreadable answer (HTTP '+r.status+')'};});})
+    .catch(function(){return {ok:false,error:'Cannot reach the server. Is "./fidtrack serve" still running?'};})
+    .then(function(j){if(!j.ok){toast(j.error||'Request failed','err');render();return null;}if(j.state){S=j.state;lastSig=sig(S);render();}return j;});
+}
+function ev(e){var a=actor();if(!a)return Promise.resolve(render()).then(function(){return null;});e.actor=a;return api('POST','/api/events',e);}
+
+/* ---------- dialog ---------- */
+var dlg=$('#dlg'),dlgResolve=null;
+function openDlg(html,wide){dlg.className=wide?'wide':'';$('#dlgC').innerHTML=html;if(!dlg.open)dlg.showModal();var f=dlg.querySelector('[autofocus]')||dlg.querySelector('input,textarea,select,button');if(f)f.focus();}
+function closeDlg(){if(dlg.open)dlg.close();}
+dlg.addEventListener('close',function(){$('#dlgC').innerHTML='';if(dlgResolve){var r=dlgResolve;dlgResolve=null;r(null);}});
+function askNote(o){return new Promise(function(res){
+  openDlg('<form class="f" id="nf"><h2 id="dlgT">'+esc(o.title)+'</h2>'+(o.text?'<p class="'+(o.danger?'note n-r':'mut')+'">'+esc(o.text)+'</p>':'')+
+    (o.noNote?'':'<label class="l">'+esc(o.label||'Note')+(o.required?' (required)':'')+'<textarea name="note" rows="3" autofocus></textarea></label>')+
+    (o.evidence?'<label class="l">Evidence (optional: screenshot path or link)<input type="text" name="evidence"></label>':'')+
+    '<div class="err" role="alert"></div><div class="acts"><button type="button" class="btn" data-a="dlg-close">Cancel</button><button class="btn '+(o.danger?'bad':'pri')+'"'+(o.noNote?' autofocus':'')+'>'+esc(o.ok||'Save')+'</button></div></form>');
+  dlgResolve=res;
+  $('#nf').onsubmit=function(e){e.preventDefault();var el=this.elements,n=el.note?el.note.value.trim():'';if(o.required&&!n){$('.err',this).textContent='A note is required.';el.note.focus();return;}var v={note:n,evidence:el.evidence?el.evidence.value.trim():''};dlgResolve=null;closeDlg();res(v);};
+});}
+
+/* ---------- header / tabs ---------- */
+function renderHeader(){
+  var st=S.status;document.title='FID Checklist — '+S.project;
+  $('#hProject').textContent=S.project;
+  $('#hSub').textContent='FID Checklist'+(S.commit?' · commit '+S.commit:'')+' · '+(LIVE?'live':'snapshot of '+fmt(S.generatedAt));
+  $('#hPct').textContent=st.summary.complete+' of '+st.summary.total+' FIDs complete ('+st.summary.pct+'%)';
+  $('#hBar').firstElementChild.style.width=st.summary.pct+'%';
+  $('#hChips').innerHTML=badge(st.c1.state,'C1')+badge(st.c2.state,'C2')+'<span class="b b-'+(st.gate.ready?'g':'n')+'">Exit gate: '+(st.gate.ready?'Ready':'Not ready')+'</span>';
+  $('#tabs').innerHTML=TABS.map(function(t){return '<button type="button" role="tab" aria-selected="'+(ui.tab===t[0])+'" data-a="tab" data-tab="'+t[0]+'" data-fk="tab|'+t[0]+'">'+esc(t[1])+'</button>';}).join('');
+}
+
+/* ---------- cases ---------- */
+function lastLine(k){var l=k.last;if(!l)return '<span class="mut">Never run.</span>';
+  return 'Last result: <b>'+esc(l.result)+'</b> by '+esc(l.by||'?')+' · '+fmt(l.at)+(l.commit?' · commit <code>'+esc(l.commit)+'</code>':'')+(l.source==='automation'?' · automated run':'')+' · '+k.runs+' run(s)'+
+    (l.note?'<br>Note: '+esc(l.note):'')+(l.evidence?'<br>Evidence: '+esc(l.evidence):'');}
+function caseBody(k){return '<div class="cb">'+(k.precondition?'<p><b>Precondition:</b> '+esc(k.precondition)+'</p>':'')+
+  '<p><b>Steps:</b></p>'+(k.steps.length?'<ol>'+k.steps.map(function(s){return '<li>'+esc(s)+'</li>';}).join('')+'</ol>':'<p class="mut">No steps written.</p>')+
+  '<p><b>Expected:</b> '+esc(k.expected)+'</p>'+
+  (k.covers.length?'<p><b>Covers:</b> '+k.covers.map(function(c){return '<code>'+esc(c)+'</code>';}).join(' ')+'</p>':'')+
+  (k.links.length?'<p><b>Links:</b> '+chips(k.links)+'</p>':'')+
+  (k.status==='approved'?'<p class="mut">Approved by '+esc(k.approvedBy||'?')+'</p>':'')+
+  '<p>'+lastLine(k)+'</p></div>';}
+function resultCtl(k,why){if(!LIVE||k.status!=='approved')return '';var d={id:k.id},o=function(c){return {cls:'sm '+c,disabled:!!why,title:why||''};};
+  return (k.mode==='auto'?'':btn('Pass','res',{id:k.id,r:'pass'},o('ok')))+btn('Fail','res',{id:k.id,r:'fail'},o('bad'))+btn('Blocked','res',{id:k.id,r:'blocked'},o('warn'));}
+function manageCtl(k){return btn('Edit','case-edit',{id:k.id},{cls:'sm'})+(k.status!=='approved'?btn('Approve','case-approve',{id:k.id},{cls:'sm ok'}):'')+btn('Delete','case-del',{id:k.id},{cls:'sm bad'});}
+function caseRow(k,o){o=o||{};var bad=k.effective==='fail'||k.effective==='blocked';
+  var x='';
+  if(k.effective==='stale'&&k.last)x+='<div class="cx"><span class="b b-a">Re-test</span> '+esc(k.last.staleReason||'changed after it passed')+'</div>';
+  if(bad&&k.last&&k.last.note)x+='<div class="cx"><b>'+esc(k.last.result)+':</b> '+esc(k.last.note)+' <span class="mut">('+esc(k.last.by||'?')+', '+fmt(k.last.at)+')</span></div>';
+  if(bad&&k.level!=='L1')x+='<div class="cx"><b>Holds back:</b> '+chips(affected(k))+' <span class="mut">(not complete until this passes)</span></div>';
+  if(o.why)x+='<div class="cx mut">'+esc(o.why)+'</div>';
+  return '<div class="case"><details data-key="k:'+esc(k.id)+'"'+dopen('k:'+k.id,false)+'><summary><code>'+esc(k.id)+'</code> <span class="ct">'+esc(k.title)+'</span> <span class="tag">'+esc(k.type)+'</span>'+
+    (k.mode==='auto'?' <span class="tag">automated</span>':'')+(o.links&&k.links.length?' <span class="mut small">links</span> '+chips(k.links):'')+'</summary>'+caseBody(k)+'</details>'+
+    '<div class="ca">'+badge(k.effective)+(o.test?resultCtl(k,o.why):'')+(o.manage?manageCtl(k):'')+'</div>'+x+'</div>';}
+
+/* ---------- overview ---------- */
+function vOverview(){var st=S.status,s2=st.stage2,h='';
+  var card=function(k,v,x){return '<div class="card"><div class="k">'+k+'</div><div class="v">'+v+'</div>'+(x||'')+'</div>';};
+  var pb=function(n,t){return '<div class="bar" role="img" aria-label="'+n+' of '+t+'"><i style="width:'+(t?Math.round(n/t*100):0)+'%"></i></div>';};
+  h+='<div class="grid">'+card('FIDs complete',st.summary.complete+' / '+st.summary.total,pb(st.summary.complete,st.summary.total))+card('Developed',s2.developed+' / '+s2.total,pb(s2.developed,s2.total))+
+    card('Individual tested',s2.l1Passed+' / '+s2.total,pb(s2.l1Passed,s2.total))+card('Stage 2 verified',s2.completeCount+' / '+s2.total,pb(s2.completeCount,s2.total))+
+    card('C1 integration',badge(st.c1.state),'<div class="small mut">'+st.c1.pass+' of '+st.c1.approved+' cases pass</div>')+card('C2 one-go',badge(st.c2.state),'<div class="small mut">'+st.c2.attempts.length+' attempt(s)</div>')+'</div>';
+  if(S.issues.length)h+='<div class="note n-a"><b>'+S.issues.length+' structure issue(s)</b> — run <code>./fidtrack scan --fix</code><ul class="plain">'+S.issues.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul></div>';
+  h+='<div class="panel"><h2>Progress by module</h2><div class="tw"><table><thead><tr><th>Module</th><th>Status</th><th>Complete</th><th style="width:30%">Progress</th></tr></thead><tbody>'+
+    st.modules.map(function(m){return '<tr><td>'+fidLabel(m.id)+'</td><td>'+badge(m.state)+'</td><td>'+m.complete+' / '+m.total+'</td><td>'+pb(m.complete,m.total)+'</td></tr>';}).join('')+'</tbody></table></div>'+
+    '<h3>FIDs by status</h3><div class="chips">'+Object.keys(st.summary.byState).map(function(k){return '<span>'+badge(k)+' '+st.summary.byState[k]+'</span>';}).join(' ')+'</div></div>';
+  var blk=st.order.map(F).filter(function(f){return ['failed','blocked','needs-retest'].indexOf(f.state)!==-1;});
+  h+='<div class="panel"><h2>What is blocking</h2>';
+  if(!blk.length)h+='<p class="mut">Nothing is failed, blocked or waiting for a re-test.</p>';
+  else h+=blk.map(function(f){var rs=f.reasons.filter(function(r){return r.indexOf('Child ')!==0;});if(!rs.length)rs=f.reasons;return '<div class="fr"><div class="fr-top"><span>'+fidLabel(f.id)+'</span> '+badge(f.state)+nbtn('Open','go-dev',{fid:f.id},'sm')+'</div><ul class="plain small">'+rs.map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul></div>';}).join('');
+  h+='</div><div class="panel"><h2>Development Verification Exit Gate '+(st.gate.ready?'<span class="b b-g">Ready for handover</span>':'<span class="b b-r">Not ready</span>')+'</h2>'+
+    st.gate.checks.map(function(c){var box=c.manualKey?'<label class="ck"><input type="checkbox" data-c="gate" data-key="'+esc(c.manualKey)+'" data-fk="gate|'+esc(c.manualKey)+'"'+(c.ok?' checked':'')+(LIVE?'':' disabled')+'> Confirm</label>':'';
+      return '<div class="fr"><div class="fr-top"><span class="b b-'+(c.ok?'g':'r')+'">'+(c.ok?'Met':'Not met')+'</span><span style="flex:1 1 240px">'+esc(c.label)+'</span><span class="mut small">'+esc(c.detail)+'</span>'+box+'</div></div>';}).join('')+
+    '</div><div class="tool"><span class="sp"></span>'+nbtn('Print sign-off sheet','print')+'</div>';
+  return h;}
+
+/* ---------- development ---------- */
+function devRow(f){var d=f.dev,x='';
+  if(f.dependsOn.length)x+='<div>Depends on: '+chips(f.dependsOn)+'</div>';
+  if(f.blocked)x+='<div class="note n-r" style="margin:4px 0"><b>Blocked:</b> '+esc(f.blocked.note)+' <span class="small">('+esc(f.blocked.by)+', '+fmt(f.blocked.at)+')</span></div>';
+  if(f.reasons.length)x+='<details data-key="why:'+esc(f.id)+'"'+dopen('why:'+f.id,false)+'><summary>Why not complete ('+f.reasons.length+')</summary><ul class="plain">'+f.reasons.map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul></details>';
+  var col=!!ui.collapsed[f.id];
+  var ck=function(field,label,on){return '<label class="ck"><input type="checkbox" data-c="dev" data-fid="'+esc(f.id)+'" data-field="'+field+'" data-fk="dev|'+esc(f.id)+'|'+field+'"'+(on?' checked':'')+(LIVE?'':' disabled')+'> '+label+'</label>';};
+  return '<div class="fr" id="fr-'+esc(f.id)+'" style="--d:'+f.depth+'"><div class="fr-top"><div class="fr-main">'+
+    (f.isParent?'<button type="button" class="tg" data-a="collapse" data-fid="'+esc(f.id)+'" data-fk="col|'+esc(f.id)+'" aria-expanded="'+(!col)+'" aria-label="'+(col?'Expand ':'Collapse ')+esc(f.id)+'">'+(col?'+':'−')+'</button>':'<span class="tg none"></span>')+
+    '<code>'+esc(f.id)+'</code><span class="nm">'+esc(f.name)+'</span>'+badge(f.state)+'</div><div class="fr-ctl">'+ck('logicRead','Logic read',d.logicRead)+ck('developed','Developed',d.developed)+
+    (d.developed&&d.developedBy?'<span class="mut small">'+esc(d.developedBy)+' · '+fmt(d.developedAt)+'</span>':'')+
+    (LIVE?nbtn('LOGIC.md','logic',{fid:f.id},'sm'):'')+nbtn('Tests','go-cases',{fid:f.id},'sm')+
+    (f.blocked?btn('Unblock','unblock',{fid:f.id},{cls:'sm'}):btn('Block','block',{fid:f.id},{cls:'sm warn'}))+'</div></div>'+(x?'<div class="fr-x">'+x+'</div>':'')+'</div>';}
+function devList(){var q=ui.devQ.toLowerCase(),sf=ui.devState,flt=q||sf,out=[];
+  S.status.order.forEach(function(id){var f=F(id);
+    if(flt){if(q&&(id+' '+f.name).toLowerCase().indexOf(q)===-1)return;if(sf&&f.state!==sf)return;}
+    else{for(var p=f.parent;p;p=F(p).parent)if(ui.collapsed[p])return;}
+    out.push(devRow(f));});
+  return out.length?out.join(''):'<p class="mut">No FIDs match.</p>';}
+function vDev(){var states=['not-started','in-progress','needs-retest','failed','blocked','complete'];
+  return '<div class="tool"><input type="search" data-i="devQ" placeholder="Filter by FID or name" aria-label="Filter FIDs" value="'+esc(ui.devQ)+'"><select data-i="devState" aria-label="Filter by status"><option value="">All statuses</option>'+
+    states.map(function(s){return '<option value="'+s+'"'+(ui.devState===s?' selected':'')+'>'+INFO[s][1]+'</option>';}).join('')+'</select>'+nbtn('Expand all','expand-all',{},'sm')+nbtn('Collapse all','collapse-all',{},'sm')+'<span class="sp"></span>'+btn('Add FID','fid-add',{},{cls:'pri'})+'</div>'+
+    '<p class="mut small" style="margin-bottom:8px">Tick <b>Logic read</b> before starting, and <b>Developed</b> only when the implementation matches LOGIC.md. Testing unlocks after that.</p><div class="panel" id="devlist">'+devList()+'</div>';}
+
+/* ---------- test cases ---------- */
+function fidOptions(sel){return S.status.order.map(function(id){var f=F(id);return '<option value="'+esc(id)+'"'+(id===sel?' selected':'')+'>'+'\u00a0\u00a0'.repeat(f.depth)+esc(id+' — '+f.name)+'</option>';}).join('');}
+function vCases(){var st=S.status;if(!st.order.length)return '<p class="mut">No FIDs yet. Add them in the Development tab.</p>';
+  if(!ui.tcFid||!F(ui.tcFid))ui.tcFid=st.order.filter(function(i){return !F(i).isParent;})[0]||st.order[0];
+  var f=F(ui.tcFid),ids=f.l1.caseIds.concat(f.l2.caseIds),ks=ids.map(K),drafts=ks.filter(function(k){return k.status!=='approved';});
+  var h='<div class="tool"><label class="ck" style="font-weight:600">Feature <select data-i="tcFid" style="max-width:min(520px,70vw)">'+fidOptions(ui.tcFid)+'</select></label>'+badge(f.state)+'<span class="sp"></span>'+(LIVE?nbtn('LOGIC.md','logic',{fid:f.id}):'')+'</div>';
+  h+='<div class="panel"><h2>Acceptance criteria '+(f.acs.length?'<span class="mut small">'+(f.acs.length-f.uncovered.length)+' of '+f.acs.length+' covered by an approved case</span>':'')+'</h2>';
+  if(!f.acs.length)h+='<p class="note n-a">LOGIC.md has no numbered acceptance criteria (section 6). '+(f.isParent?'A parent feature may rely on its integration cases instead.':'Write them first: a feature without criteria cannot be verified.')+'</p>';
+  else h+='<ul class="acl">'+f.acs.map(function(a){var un=f.uncovered.indexOf(a.id)!==-1;return '<li><span class="b b-'+(un?'a':'g')+'">'+(un?'Not covered':'Covered')+'</span><span><code>'+esc(a.id)+'</code> '+esc(a.text)+'</span></li>';}).join('')+'</ul>';
+  h+='<h3>Scenario types with an approved case</h3><div class="chips">'+S.scenarioTypes.map(function(t){var on=f.typesCovered.indexOf(t.id)!==-1;return '<span class="b b-'+(on?'g':'n')+'" title="'+esc(t.from)+'">'+(on?'✓ ':'– ')+esc(t.label)+'</span>';}).join('')+'</div></div>';
+  h+='<div class="tool">'+btn('Draft from LOGIC.md','case-gen',{fid:f.id})+btn('New individual case (L1)','case-new',{level:'L1',fid:f.id},{cls:'pri'})+btn('New integration case (L2)','case-new',{level:'L2',fid:f.id})+(drafts.length?btn('Approve all '+drafts.length+' draft(s)','case-approve-all',{fid:f.id},{cls:'ok'}):'')+'</div>';
+  if(LIVE)h+='<p class="mut small" style="margin-bottom:8px">Drafts do not count until a person approves them. Editing an approved case returns it to draft and clears its pass.</p>';
+  [['L1','Individual cases (L1)',f.l1],['L2','Integration cases (L2)'+(f.l2.required?' — required for this feature':''),f.l2]].forEach(function(g){
+    h+='<div class="fb"><div class="fb-h"><span class="nm">'+esc(g[1])+'</span>'+badge(g[2].state)+'<span class="mut small">'+g[2].approved+' approved, '+g[2].draft+' draft</span></div><div class="fb-b">'+
+      (g[2].caseIds.length?g[2].caseIds.map(function(i){return caseRow(K(i),{manage:true,links:true});}).join(''):'<p class="mut" style="padding:8px 0">None yet.</p>')+'</div></div>';});
+  return h;}
+
+/* ---------- L1 / L2 checklists ---------- */
+function levelList(lv){var st=S.status,key=lv==='l1'?'l1':'l2',q=ui.lvQ[lv].toLowerCase(),todo=ui.lvTodo[lv],h='';
+  st.modules.forEach(function(m){var blocks='',pass=0,appr=0;
+    st.order.forEach(function(id){if(top(id)!==m.id)return;var f=F(id),L=f[key],ks=L.caseIds.map(K);
+      if(!ks.length&&(L.state==='n/a'))return;
+      var live=ks.filter(function(k){return k.status==='approved';});pass+=L.pass;appr+=L.approved;
+      var show=live.filter(function(k){if(todo&&k.effective==='pass')return false;if(q&&(k.id+' '+k.title+' '+id+' '+f.name).toLowerCase().indexOf(q)===-1)return false;return true;});
+      if((q||todo)&&!show.length&&!(todo&&!q&&!live.length))return;
+      var why=f.dev.developed?'':'Not developed yet';
+      blocks+='<div class="fb"><div class="fb-h"><code>'+esc(id)+'</code><span class="nm">'+esc(f.name)+'</span>'+badge(L.state)+'<span class="mut small">'+L.pass+' of '+L.approved+' pass</span>'+(why?'<span class="b b-n">Not developed yet</span>':'')+
+        (lv==='l1'&&f.uncovered.length?'<span class="b b-a">No test for '+esc(f.uncovered.join(', '))+'</span>':'')+'</div><div class="fb-b">'+
+        (show.length?show.map(function(k){return caseRow(k,{test:true,why:why,links:lv==='l2'});}).join(''):'')+
+        (!live.length?'<p class="mut" style="padding:8px 0">No approved '+(lv==='l1'?'individual':'integration')+' cases'+(L.draft?' ('+L.draft+' draft waiting for approval)':'')+'. '+nbtn('Write test cases','go-cases',{fid:id},'sm')+'</p>':(L.draft?'<p class="mut small" style="padding:4px 0">'+L.draft+' draft case(s) not shown until approved.</p>':''))+'</div></div>';});
+    if(blocks)h+='<details class="mod" data-key="m:'+lv+':'+esc(m.id)+'"'+dopen('m:'+lv+':'+m.id,true)+'><summary>'+fidLabel(m.id)+' <span class="mut small">'+pass+' of '+appr+' pass</span></summary>'+blocks+'</details>';});
+  return h||'<p class="mut">'+(q||todo?'Nothing matches. Everything shown here has passed, or the filter is too narrow.':'No test cases yet. Write them in the Test cases tab.')+'</p>';}
+function vLevel(lv){return '<div class="tool"><input type="search" data-i="lvQ" data-lv="'+lv+'" placeholder="Filter cases" aria-label="Filter cases" value="'+esc(ui.lvQ[lv])+'"><label class="ck"><input type="checkbox" data-i="lvTodo" data-lv="'+lv+'"'+(ui.lvTodo[lv]?' checked':'')+'> Only cases still to pass</label></div>'+
+  '<p class="mut small" style="margin-bottom:8px">'+(lv==='l1'?'Each feature tested on its own. One failed case keeps the feature not complete.':'Each feature tested with its children and dependencies. A failed case holds back every feature it links.')+' Automated cases can only pass from a real test run.</p><div id="lvlist">'+levelList(lv)+'</div>';}
+
+/* ---------- C1 ---------- */
+function vC1(){var c=S.status.c1,ks=c.caseIds.map(K),drafts=ks.filter(function(k){return k.status!=='approved';}),h='';
+  h+='<div class="tool"><h2 style="margin:0">C1 — all-feature integration</h2>'+badge(c.state)+'<span class="mut small">'+c.pass+' of '+c.approved+' pass · '+c.draft+' draft</span><span class="sp"></span>'+btn('New C1 case','case-new',{level:'C1',fid:''},{cls:'pri'})+(drafts.length?btn('Approve all '+drafts.length+' draft(s)','case-approve-all',{fid:'C1'},{cls:'ok'}):'')+'</div>';
+  if(c.locked)h+='<div class="note n-b"><b>Locked.</b> C1 opens when every FID has finished Stage 2 (developed, individual tests and integration tests passing). '+S.status.stage2.completeCount+' of '+S.status.stage2.total+' are there. Cases can be written and approved now.</div>';
+  if(c.uncoveredDeps.length)h+='<div class="note n-a"><b>Dependencies with no C1 case:</b> every cross-module dependency needs a case linking both features.<ul class="plain">'+c.uncoveredDeps.map(function(d){return '<li>'+fidLabel(d.from)+' depends on '+fidLabel(d.to)+'</li>';}).join('')+'</ul></div>';
+  if(!c.hasFlow)h+='<div class="note n-a"><b>No end-to-end flow yet.</b> C1 needs at least one approved case of type <code>e2e-flow</code> covering a complete business workflow. Flows are also re-run in every C2 attempt.</div>';
+  h+='<div class="fb"><div class="fb-b">'+(ks.length?ks.map(function(k){return caseRow(k,{test:true,manage:true,links:true,why:c.locked&&k.status==='approved'?'Locked until Stage 2 is complete':''});}).join(''):'<p class="mut" style="padding:8px 0">No C1 cases yet.</p>')+'</div></div>';
+  return h;}
+
+/* ---------- C2 ---------- */
+function c2Label(id){var f=F(id),k=K(id);return '<code>'+esc(id)+'</code> '+esc(f?f.name:k?k.title:'')+(k?' <span class="tag">end-to-end flow</span>'+(k.mode==='auto'?' <span class="tag">automated</span>':''):'');}
+function c2Items(a,run){return a.itemIds.map(function(id){var r=a.items[id],k=K(id);
+  return '<div class="case"><div style="flex:1 1 300px;min-width:0">'+c2Label(id)+(r&&r.note?'<div class="small">Note: '+esc(r.note)+'</div>':'')+'</div><div class="ca">'+
+    (r?badge(r.result)+'<span class="mut small">'+esc(r.by)+' · '+fmt(r.at)+'</span>':badge('pending')+(run?((k&&k.mode==='auto')?'':btn('Pass','c2-res',{id:id,r:'pass'},{cls:'sm ok'}))+btn('Fail','c2-res',{id:id,r:'fail'},{cls:'sm bad'}):''))+'</div></div>';}).join('');}
+function vC2(){var c=S.status.c2,h='',cur=c.attempts.filter(function(a){return a.n===c.current;})[0];
+  h+='<div class="tool"><h2 style="margin:0">C2 — one-go complete system verification</h2>'+badge(c.state)+'<span class="sp"></span>'+(cur||c.state==='pass'?'':btn('Start attempt '+c.nextAttempt,'c2-start',{},{cls:'pri',disabled:!c.canStart,title:c.canStart?'':'C1 must have passed and every FID must be complete'}))+'</div>';
+  h+='<div class="note n-a"><b>Strict rules.</b> Every FID and every end-to-end flow is verified in the same attempt. One failure invalidates the whole attempt. Nothing is carried forward: a new attempt starts from a blank checklist. Changing code or logic during an attempt invalidates it.</div>';
+  if(!cur&&!c.canStart&&c.state!=='pass')h+='<div class="note n-b">A new attempt can start once C1 has passed and every FID is complete (C1 is <b>'+esc((INFO[S.status.c1.state]||['',S.status.c1.state])[1])+'</b>, '+S.status.summary.complete+' of '+S.status.summary.total+' FIDs complete).</div>';
+  if(c.state==='pass')h+='<div class="note n-g"><b>C2 passed</b> in attempt '+c.attempts[c.attempts.length-1].n+' with every item passing in one go.</div>';
+  if(c.state==='stale')h+='<div class="note n-a"><b>Code or logic changed after C2 passed.</b> A fresh attempt is needed.</div>';
+  if(cur)h+='<div class="fb"><div class="fb-h"><span class="nm">Attempt '+cur.n+'</span>'+badge('running')+'<span class="mut small">'+cur.done+' of '+cur.total+' done · started '+fmt(cur.startedAt)+' by '+esc(cur.by)+(cur.commit?' · commit '+esc(cur.commit):'')+'</span><span class="sp" style="flex:1"></span>'+btn('Abort attempt','c2-abort',{},{cls:'sm bad'})+'</div><div class="fb-b">'+c2Items(cur,true)+'</div></div>';
+  var past=c.attempts.filter(function(a){return a.n!==c.current;}).reverse();
+  h+='<h3>Attempt history</h3>'+(past.length?past.map(function(a){return '<details class="fb" data-key="c2:'+a.n+'"'+dopen('c2:'+a.n,false)+'><summary class="fb-h"><span class="nm">Attempt '+a.n+'</span>'+badge(a.state)+'<span class="mut small">'+a.done+' of '+a.total+' items · '+fmt(a.startedAt)+' by '+esc(a.by)+(a.commit?' · commit '+esc(a.commit):'')+'</span>'+(a.reason?'<span class="small">'+esc(a.reason)+'</span>':'')+'</summary><div class="fb-b">'+c2Items(a,false)+'</div></details>';}).join(''):'<p class="mut">No finished attempts.</p>');
+  return h;}
+
+/* ---------- print sign-off ---------- */
+function buildPrint(){var st=S.status,t=function(s){return (INFO[s]||['',s])[1];};
+  var h='<h1>'+esc(S.project)+' — Development Verification Sign-off</h1><p>Generated '+fmt(S.generatedAt)+(S.commit?' · commit '+esc(S.commit):'')+' · '+st.summary.complete+' of '+st.summary.total+' FIDs complete ('+st.summary.pct+'%)</p>';
+  h+='<h2>Modules</h2><table><tr><th>Module</th><th>Status</th><th>Complete</th></tr>'+st.modules.map(function(m){return '<tr><td>'+esc(m.id+' '+m.name)+'</td><td>'+t(m.state)+'</td><td>'+m.complete+' / '+m.total+'</td></tr>';}).join('')+'</table>';
+  h+='<h2>Every FID</h2><table><tr><th>FID</th><th>Feature</th><th>Developed</th><th>Individual (L1)</th><th>Integration (L2)</th><th>Status</th></tr>'+st.order.map(function(id){var f=F(id);return '<tr><td>'+esc(id)+'</td><td>'+esc(f.name)+'</td><td>'+(f.dev.developed?'Yes'+(f.dev.developedBy?' ('+esc(f.dev.developedBy)+')':''):'No')+'</td><td>'+t(f.l1.state)+(f.l1.approved?' '+f.l1.pass+'/'+f.l1.approved:'')+'</td><td>'+t(f.l2.state)+(f.l2.approved?' '+f.l2.pass+'/'+f.l2.approved:'')+'</td><td><b>'+t(f.state)+'</b></td></tr>';}).join('')+'</table>';
+  h+='<h2>Stage 3</h2><table><tr><th>Check</th><th>Result</th><th>Detail</th></tr><tr><td>C1 all-feature integration</td><td><b>'+t(st.c1.state)+'</b></td><td>'+st.c1.pass+' of '+st.c1.approved+' cases pass</td></tr>'+
+    (st.c2.attempts.length?st.c2.attempts.map(function(a){return '<tr><td>C2 attempt '+a.n+'</td><td><b>'+t(a.state)+'</b></td><td>'+a.done+' of '+a.total+' items · '+fmt(a.startedAt)+' · '+esc(a.by)+(a.reason?' · '+esc(a.reason):'')+'</td></tr>';}).join(''):'<tr><td>C2 one-go verification</td><td><b>'+t(st.c2.state)+'</b></td><td>No attempts</td></tr>')+'</table>';
+  h+='<h2>Exit gate: '+(st.gate.ready?'READY':'NOT READY')+'</h2><table><tr><th>Requirement</th><th>Met</th><th>Detail</th></tr>'+st.gate.checks.map(function(c){return '<tr><td>'+esc(c.label)+'</td><td><b>'+(c.ok?'Yes':'No')+'</b></td><td>'+esc(c.detail)+'</td></tr>';}).join('')+'</table>';
+  h+='<h2>Sign-off</h2><table class="sig"><tr><th>Role</th><th>Name</th><th>Date</th><th>Signature</th><th>Status</th></tr>'+['Lead Developer','QA Test Engineer','Technical Architect','Product Owner'].map(function(r){return '<tr><td>'+r+'</td><td></td><td></td><td></td><td>☐ Pending / ☐ Passed</td></tr>';}).join('')+'</table>';
+  $('#print').innerHTML=h;}
+window.addEventListener('beforeprint',buildPrint);
+
+/* ---------- render ---------- */
+var VIEWS={overview:vOverview,dev:vDev,cases:vCases,l1:function(){return vLevel('l1');},l2:function(){return vLevel('l2');},c1:vC1,c2:vC2};
+function render(){if(!S){$('#main').innerHTML='<p class="note n-r">No checklist data in this file.</p>';return;}
+  var y=window.scrollY,ae=document.activeElement,fk=ae&&ae.dataset?ae.dataset.fk:null;
+  renderHeader();$('#main').innerHTML=VIEWS[ui.tab]();
+  window.scrollTo(0,y);
+  if(fk&&!dlg.open){var el=document.querySelector('[data-fk="'+cssEsc(fk)+'"]');if(el)el.focus({preventScroll:true});}}
+function setHash(){var h='#'+ui.tab+(ui.tab==='cases'&&ui.tcFid?'/'+ui.tcFid:'');if(location.hash!==h)history.replaceState(null,'',h);}
+function readHash(){var p=decodeURIComponent(location.hash.slice(1)).split('/');if(VIEWS[p[0]])ui.tab=p[0];if(p[0]==='cases'&&p[1])ui.tcFid=p[1];}
+function go(tab,fid){ui.tab=tab;if(fid&&tab==='cases')ui.tcFid=fid;setHash();render();window.scrollTo(0,0);}
+window.addEventListener('hashchange',function(){readHash();render();});
+
+/* ---------- forms ---------- */
+function linkPick(sel,exclude){return '<fieldset><legend>Linked features</legend><div class="pick">'+S.status.order.filter(function(i){return i!==exclude;}).map(function(i){return '<label class="ck"><input type="checkbox" name="links" value="'+esc(i)+'"'+(sel.indexOf(i)!==-1?' checked':'')+'> '+esc(i+' — '+F(i).name)+'</label>';}).join('')+'</div></fieldset>';}
+function caseForm(k){var c1=k.level==='C1',f=c1?null:F(k.fid),isNew=!k.id;
+  var types=c1?S.scenarioTypes.filter(function(t){return t.id==='integration'||t.id==='e2e-flow';}):S.scenarioTypes;
+  var typ=k.type||(c1||k.level==='L2'?'integration':'functional');
+  openDlg('<form class="f" id="cf"><h2 id="dlgT">'+(isNew?'New ':'Edit ')+(c1?'C1 cross-feature case':'test case for '+esc(k.fid))+(isNew?'':' <code>'+esc(k.id)+'</code>')+'</h2>'+
+    (!isNew&&k.status==='approved'?'<p class="note n-a">This case is approved. Changing its content returns it to draft, and its pass no longer counts until it is approved and run again.</p>':'')+
+    '<div class="row">'+(c1?'':'<label class="l">Level<select name="level"><option value="L1"'+(k.level==='L1'?' selected':'')+'>L1 — this feature alone</option><option value="L2"'+(k.level==='L2'?' selected':'')+'>L2 — with children / dependencies</option></select></label>')+
+    '<label class="l">Scenario type<select name="type">'+types.map(function(t){return '<option value="'+t.id+'"'+(t.id===typ?' selected':'')+'>'+esc(t.label)+'</option>';}).join('')+'</select></label>'+
+    '<label class="l">How it is run<select name="mode"><option value="manual"'+(k.mode!=='auto'?' selected':'')+'>Manual — a person verifies</option><option value="auto"'+(k.mode==='auto'?' selected':'')+'>Automated — test name contains the case id</option></select></label></div>'+
+    '<label class="l">Title (what is being proved)<input type="text" name="title" value="'+esc(k.title||'')+'" required autofocus></label>'+
+    '<label class="l">Precondition<textarea name="precondition" rows="2">'+esc(k.precondition||'')+'</textarea></label>'+
+    '<label class="l">Steps (one per line)<textarea name="steps" rows="5">'+esc((k.steps||[]).join('\n'))+'</textarea></label>'+
+    '<label class="l">Expected result<textarea name="expected" rows="3" required>'+esc(k.expected||'')+'</textarea></label>'+
+    (!c1&&f.acs.length?'<fieldset><legend>Acceptance criteria this case proves</legend><div class="pick">'+f.acs.map(function(a){return '<label class="ck" style="white-space:normal;align-items:flex-start"><input type="checkbox" name="covers" value="'+esc(a.id)+'"'+((k.covers||[]).indexOf(a.id)!==-1?' checked':'')+'> <span><b>'+esc(a.id)+'</b> '+esc(a.text)+'</span></label>';}).join('')+'</div></fieldset>':'')+
+    '<div id="cfLinks"'+(k.level==='L1'?' hidden':'')+'>'+linkPick(k.links||[],c1?null:k.fid)+(c1?'<p class="mut small">A C1 case must link at least two features.</p>':'')+'</div>'+
+    '<div class="err" role="alert"></div><div class="acts"><button type="button" class="btn" data-a="dlg-close">Cancel</button><button class="btn pri">Save as draft</button></div></form>',true);
+  var form=$('#cf'),E=form.elements;if(E.level)E.level.onchange=function(){$('#cfLinks').hidden=this.value==='L1';};
+  form.onsubmit=function(e){e.preventDefault();var lv=c1?'C1':E.level.value;
+    var vals=function(n){return Array.prototype.slice.call(form.querySelectorAll('input[name='+n+']:checked')).map(function(i){return i.value;});};
+    var def={id:k.id||undefined,level:lv,fid:c1?undefined:k.fid,type:E.type.value,mode:E.mode.value,title:E.title.value,precondition:E.precondition.value,steps:E.steps.value.split('\n'),expected:E.expected.value,covers:c1?[]:vals('covers'),links:lv==='L1'?[]:vals('links')};
+    if(lv==='C1'&&def.links.length<2){$('.err',form).textContent='Pick at least two linked features.';return;}
+    fetch('/api/cases',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({case:def})}).then(function(r){return r.json();}).catch(function(){return {ok:false,error:'Cannot reach the server.'};}).then(function(j){
+      if(!j.ok){$('.err',form).textContent=j.error;return;}S=j.state;lastSig=sig(S);closeDlg();render();toast('Saved '+j.case.id+' as '+j.case.status,'ok');});};}
+function fidForm(){openDlg('<form class="f" id="ff"><h2 id="dlgT">Add a FID</h2><p class="mut small">FIDs are never reused or renumbered. Add the parent before its children.</p><div class="row"><label class="l">FID<input type="text" name="id" placeholder="FID03.5" required autofocus pattern="FID\\d{2}(\\.\\d+)*"></label><label class="l">Feature name<input type="text" name="name" required></label></div>'+
+  '<label class="l">Depends on (FIDs, comma separated)<input type="text" name="dep" placeholder="FID01.1, FID07.3"></label><label class="l">Implementation paths (comma separated, relative to the project root)<input type="text" name="paths" placeholder="src/features/catalog"></label>'+
+  '<div class="err" role="alert"></div><div class="acts"><button type="button" class="btn" data-a="dlg-close">Cancel</button><button class="btn pri">Add FID</button></div></form>');
+  var form=$('#ff'),E=form.elements;form.onsubmit=function(e){e.preventDefault();var sp=function(v){return v.split(',').map(function(s){return s.trim();}).filter(Boolean);};
+    fetch('/api/fids',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:E.id.value.trim(),name:E.name.value.trim(),dependsOn:sp(E.dep.value),paths:sp(E.paths.value)})}).then(function(r){return r.json();}).catch(function(){return {ok:false,error:'Cannot reach the server.'};}).then(function(j){
+      if(!j.ok){$('.err',form).textContent=j.error;return;}S=j.state;lastSig=sig(S);closeDlg();render();toast('Added '+j.fid.id,'ok');});};}
+function showLogic(fid){fetch('/api/logic/'+encodeURIComponent(fid)).then(function(r){return r.json();}).catch(function(){return {ok:false,error:'Cannot reach the server.'};}).then(function(j){if(!j.ok)return toast(j.error,'err');
+  var f=F(fid);openDlg('<h2 id="dlgT">'+esc(fid)+' — LOGIC.md</h2><p class="mut small">'+esc(f?f.dir+'/features/LOGIC.md':'')+'</p><pre class="logic" tabindex="0">'+esc(j.text||'(empty)')+'</pre><div class="f"><div class="acts"><button type="button" class="btn pri" data-a="dlg-close" autofocus>Close</button></div></div>',true);});}
+
+/* ---------- actions ---------- */
+var ACT={
+  tab:function(d){go(d.tab);},
+  'dlg-close':function(){closeDlg();},
+  print:function(){buildPrint();window.print();},
+  collapse:function(d){ui.collapsed[d.fid]=!ui.collapsed[d.fid];render();},
+  'expand-all':function(){ui.collapsed={};render();},
+  'collapse-all':function(){S.status.order.forEach(function(i){if(F(i).isParent)ui.collapsed[i]=true;});render();},
+  'go-cases':function(d){go('cases',d.fid);},
+  'go-dev':function(d){ui.devQ='';ui.devState='';for(var p=F(d.fid).parent;p;p=F(p).parent)delete ui.collapsed[p];ui.open['why:'+d.fid]=true;ui.tab='dev';setHash();render();var el=document.getElementById('fr-'+d.fid);if(el)el.scrollIntoView({block:'center'});},
+  logic:function(d){showLogic(d.fid);},
+  'fid-add':function(){fidForm();},
+  block:function(d){askNote({title:'Block '+d.fid,label:'What is blocking this feature?',required:true,ok:'Mark blocked',danger:true}).then(function(v){if(v)ev({type:'block',fid:d.fid,blocked:true,note:v.note});});},
+  unblock:function(d){ev({type:'block',fid:d.fid,blocked:false});},
+  'case-gen':function(d){api('POST','/api/cases/generate',{fid:d.fid}).then(function(j){if(j)toast(j.made.length?j.made.length+' draft(s) created from '+j.acs+' acceptance criteria. Fill in the steps, then approve.':(j.acs?'Every acceptance criterion already has a case.':'LOGIC.md has no numbered acceptance criteria to draft from.'),j.made.length?'ok':'');});},
+  'case-new':function(d){caseForm({level:d.level,fid:d.fid||null,covers:[],links:[],steps:[],mode:'manual'});},
+  'case-edit':function(d){caseForm(K(d.id));},
+  'case-del':function(d){var k=K(d.id);askNote({title:'Delete '+d.id+'?',text:'"'+k.title+'" will be removed. Its past results stay in the record.',noNote:true,ok:'Delete case',danger:true}).then(function(v){if(v)api('DELETE','/api/cases/'+encodeURIComponent(d.id));});},
+  'case-approve':function(d){var a=actor();if(a)api('POST','/api/cases/approve',{ids:[d.id],actor:a}).then(function(j){if(j)toast('Approved '+d.id,'ok');});},
+  'case-approve-all':function(d){var a=actor();if(!a)return;var ids=Object.keys(S.status.cases).filter(function(i){var k=K(i);return k.status!=='approved'&&(d.fid==='C1'?k.level==='C1':k.fid===d.fid);});
+    askNote({title:'Approve '+ids.length+' draft case(s)?',text:'Approving means you have read each case and it correctly tests the approved logic.',noNote:true,ok:'Approve all'}).then(function(v){if(v)api('POST','/api/cases/approve',{ids:ids,actor:a}).then(function(j){if(j)toast(j.approved.length+' case(s) approved','ok');});});},
+  res:function(d){if(d.r==='pass')return ev({type:'result',caseId:d.id,result:'pass'});
+    askNote({title:(d.r==='fail'?'Fail ':'Blocked: ')+d.id,label:d.r==='fail'?'What happened instead of the expected result?':'What stops this case from being run?',required:true,evidence:true,ok:'Record '+d.r,danger:true}).then(function(v){if(v)ev({type:'result',caseId:d.id,result:d.r,note:v.note,evidence:v.evidence});});},
+  'c2-start':function(){if(!actor())return;askNote({title:'Start C2 attempt '+S.status.c2.nextAttempt+'?',text:S.status.c2.itemsForNew.length+' items must all pass in this one attempt. Do not change code or logic until it is finished.',noNote:true,ok:'Start attempt'}).then(function(v){if(v)ev({type:'c2.start'});});},
+  'c2-res':function(d){if(d.r==='pass')return ev({type:'c2.result',itemId:d.id,result:'pass'});
+    askNote({title:'Fail '+d.id+' in this C2 attempt',text:'This fails the whole attempt. A new attempt will have to start from the beginning.',label:'What failed?',required:true,ok:'Record failure',danger:true}).then(function(v){if(v)ev({type:'c2.result',itemId:d.id,result:'fail',note:v.note});});},
+  'c2-abort':function(){askNote({title:'Abort this C2 attempt',label:'Why is it being aborted?',required:true,ok:'Abort attempt',danger:true}).then(function(v){if(v)ev({type:'c2.abort',note:v.note});});}
+};
+document.addEventListener('click',function(e){var t=e.target.closest('[data-a]');if(!t||t.disabled)return;var fn=ACT[t.dataset.a];if(fn){if(t.closest('summary'))e.preventDefault();fn(t.dataset);}});
+document.addEventListener('change',function(e){var t=e.target,d=t.dataset;
+  if(d.c==='dev')ev({type:'dev',fid:d.fid,field:d.field,value:t.checked});
+  else if(d.c==='gate')ev({type:'gate',key:d.key,value:t.checked});
+  else if(d.i==='devState'){ui.devState=t.value;$('#devlist').innerHTML=devList();}
+  else if(d.i==='tcFid'){ui.tcFid=t.value;setHash();render();}
+  else if(d.i==='lvTodo'){ui.lvTodo[d.lv]=t.checked;$('#lvlist').innerHTML=levelList(d.lv);}});
+document.addEventListener('input',function(e){var d=e.target.dataset;
+  if(d.i==='devQ'){ui.devQ=e.target.value;$('#devlist').innerHTML=devList();}
+  else if(d.i==='lvQ'){ui.lvQ[d.lv]=e.target.value;$('#lvlist').innerHTML=levelList(d.lv);}
+  else if(e.target.id==='who'){try{localStorage.setItem('devtest.who',e.target.value);}catch(x){}if(e.target.value.trim())$('#nameMsg').textContent='';}});
+document.addEventListener('toggle',function(e){var d=e.target;if(d.tagName==='DETAILS'&&d.dataset.key)ui.open[d.dataset.key]=d.open;},true);
+
+/* ---------- live refresh ---------- */
+function sig(s){return s?s.eventCount+'|'+s.fingerprint+'|'+JSON.stringify(s.status)+'|'+s.issues.length:'';}
+var lastSig=sig(S);
+function poll(){var ae=document.activeElement;if(dlg.open||(ae&&/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)&&ae.type!=='checkbox'))return;
+  fetch('/api/state').then(function(r){return r.json();}).then(function(j){if(!j.ok||dlg.open)return;var n=sig(j.state);if(n!==lastSig){S=j.state;lastSig=n;render();}}).catch(function(){});}
+
+/* ---------- boot ---------- */
+if(!LIVE){$('#ro').hidden=false;$('#hName').hidden=true;}
+else{try{$('#who').value=localStorage.getItem('devtest.who')||'';}catch(x){}setInterval(poll,5000);}
+readHash();render();
+})();
+</script>
+</body>
+</html>

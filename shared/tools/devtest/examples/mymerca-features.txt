@@ -1,0 +1,50 @@
+FID01 — Authentication, RBAC & User Identity
+FID01.1 — Customer Mobile OTP Auth & Profile Init
+FID01.2 — Vendor Auth & Multi-Role Elevation
+FID01.3 — Admin Auth & RBAC Session Security
+FID01.4 — Account Lifecycle & Deactivation
+FID01.5 — Customer Save Store & Favorites Manager
+FID02 — Multi-Modal Location & Discovery
+FID02.1 — Multi-Modal Location Resolution
+FID02.2 — Location Persistence & Coarse Privacy
+FID02.3 — Location-Aware Search & Faceted Category Nav
+FID03 — 3-Tier Product Catalog & Cartesian Variants
+FID03.1 — 3-Tier Hierarchy & Strict Leaf Category Binding
+FID03.2 — Cartesian Variant Generator & Uniform Pricing
+FID03.3 — Stock Toggles, Listing Quotas & Moderation
+FID03.4 — Vendor Missing Category & Variant Request Queue
+FID04 — 2-Tier Service Taxonomy & Enquiries
+FID04.1 — 2-Tier Service Taxonomy & Structured Listings
+FID04.2 — Service Discovery & Administrative Moderation
+FID04.3 — Vendor Service Category Request Workflow
+FID05 — Pure WhatsApp Enquiry Commerce Model
+FID05.1 — Structured WhatsApp Payload Composition
+FID05.2 — Guest & Authenticated WhatsApp Protocol Handoff
+FID05.3 — Immutable Lead Telemetry Logging & Analytics
+FID06 — Vendor Store Onboarding, KYC & Profiles
+FID06.1 — Multi-Step Vendor Onboarding & KYC
+FID06.2 — Admin Store Verification Queue & Approval State
+FID06.3 — Store Status Requests & Subscription Freezing
+FID06.4 — Public Store Profile & Vanity URL Routing
+FID07 — Subscriptions & Quota Stacking Engine
+FID07.1 — Subscription Plans & Quad-Capacity Model
+FID07.2 — Dual Checkout Pathways: Pay Now vs Admin Request
+FID07.3 — Multi-Plan Stacking & Cumulative Math
+FID07.4 — Category Quota Enforcement & Store Category Lock
+FID08 — Promotions, Offers & Promotional Banners
+FID08.1 — Vendor Banners & Declarative Offer Pricing
+FID08.2 — Dedicated Offer Landing Page
+FID08.3 — Admin Homepage Announcements & Carousel Banners
+FID08.4 — Vendor Advertising Inquiries
+FID09 — Customer Reviews, Ratings & Scoring
+FID09.1 — Verified Customer Rating & Qualitative Reviews
+FID09.2 — Direct Live Publication & Administrative Oversight
+FID10 — Multi-Device Push Notifications & FCM
+FID10.1 — Multi-Device Token Registry & Edge Push Dispatch
+FID10.2 — In-App Lifecycle Alerts
+FID10.3 — Admin Broadcast Center & FCM Topic Messaging
+FID11 — Admin Governance, Telemetry & Audit Ledger
+FID11.1 — Top-Level Plans Tab & System Telemetry
+FID11.2 — User & Merchant Identity Account Governance
+FID11.3 — Dynamic Platform Settings Engine & Legal Policies
+FID11.4 — Immutable Audit Ledger & Sensitive Redaction
